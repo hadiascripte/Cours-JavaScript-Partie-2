@@ -66,8 +66,7 @@ btn2.addEventListener("click", () => {
 });
 
 
-/* A noter que en CSS le #id > .class > balise. En ajoutant directement dans une balise styl dans une div (<div style="">) le style sera prioritaire sur tous les autres.
-Si en CSS je sélectionne un élément par son # et que en JS je le cible par une class (.classList) ceci ne fonctionnera pas.  */
+/* A noter que en CSS le #id > .class > balise. En ajoutant directement dans une balise styl dans une div (<div style="">) le style sera prioritaire sur tous les autres. */
 
 
 //***************************************** Mouse Events
