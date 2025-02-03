@@ -42,7 +42,7 @@ console.log(response);
 //Attehtion: nous n'avons pas besoin de mettre un . dans la parenthèse car ici il ne s'agit pas d'une class HTML mais d'un class CSS qui a éte fait pour être injectée dans le JS. En lui disant .classList il sait déjà qu'il s'agit d'une class.
 
 questionContainer.addEventListener("click", () => {
-    //   questionContainer.classList.toggle("question-clicked");
+    questionContainer.classList.toggle("question-clicked");
 });
 
 //Pour retirer une class déjà injectée, on peut revenir dans la variable en question et ajouter: .toggle (à la place de .add).
