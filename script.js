@@ -42,7 +42,7 @@ console.log(response);
 //Attehtion: nous n'avons pas besoin de mettre un . dans la parenthèse car ici il ne s'agit pas d'une class HTML mais d'un class CSS qui a éte fait pour être injectée dans le JS. En lui disant .classList il sait déjà qu'il s'agit d'une class.
 
 questionContainer.addEventListener("click", () => {
-    questionContainer.classList.toggle("question-clicked");
+    // questionContainer.classList.toggle("question-clicked");
 });
 
 //Pour retirer une class déjà injectée, on peut revenir dans la variable en question et ajouter: .toggle (à la place de .add).
@@ -54,11 +54,20 @@ questionContainer.addEventListener("click", () => {
 //Une fois l'élément sélectionné (ligne 23), on ajoute maintenant un événement.
 
 btn1.addEventListener("click", () => {
+    response.classList.add("show-response");
     response.style.visibility = "visible";
     response.style.background = "green";
 });
 
 btn2.addEventListener("click", () => {
-    response.style.visibility = "visible";
+    // response.style.visibility = "visible";
+    response.classList.add("show-response")
     response.style.background = "red";
 });
+
+
+/* A noter que en CSS le #id > .class > balise. En ajoutant directement dans une balise styl dans une div (<div style="">) le style sera prioritaire sur tous les autres.
+Si en CSS je sélectionne un élément par son # et que en JS je le cible par une class (.classList) ceci ne fonctionnera pas.  */
+
+
+//***************************************** Mouse Events
