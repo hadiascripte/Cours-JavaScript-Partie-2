@@ -10,7 +10,7 @@ body {
     min-height: 200vh;
 }
 .box {
-    border: white;
+    border: rgb(255, 255, 255);
     transition: 0.25s ease;
     background: black;
     padding: 10px;
@@ -33,4 +33,11 @@ p {
       opacity: 1;
       transform: translateX(0);
 }
-
+.mousemove{
+      height: 50px;
+      width: 50px;
+      border: 2px solid pink;
+      /* Pour qu'elle suive la souris il faut lui mettre une position absolute */
+      position: absolute;
+      border-radius: 50px;
+}

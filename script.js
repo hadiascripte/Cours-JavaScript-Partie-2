@@ -20,7 +20,6 @@ console.log(baliseHtml);/*
 // // Pour cibler un class il faut utiliser le . pour qu'elle soit pointé correctement. Sans le point il ne saura pas qui est pointé :
 
 const questionContainer = document.querySelector(".click-event");
-
 const btn1 = document.querySelector("#btn-1");
 const btn2 = document.getElementById("btn-2");
 const response = document.querySelector("p");
@@ -42,7 +41,7 @@ console.log(response);
 //Attehtion: nous n'avons pas besoin de mettre un . dans la parenthèse car ici il ne s'agit pas d'une class HTML mais d'un class CSS qui a éte fait pour être injectée dans le JS. En lui disant .classList il sait déjà qu'il s'agit d'une class.
 
 questionContainer.addEventListener("click", () => {
-    // questionContainer.classList.toggle("question-clicked");
+    questionContainer.classList.toggle("question-clicked");
 });
 
 //Pour retirer une class déjà injectée, on peut revenir dans la variable en question et ajouter: .toggle (à la place de .add).
@@ -61,12 +60,17 @@ btn1.addEventListener("click", () => {
 
 btn2.addEventListener("click", () => {
     // response.style.visibility = "visible";
-    response.classList.add("show-response")
+    response.classList.add("show-response");
     response.style.background = "red";
 });
 
-
-/* A noter que en CSS le #id > .class > balise. En ajoutant directement dans une balise styl dans une div (<div style="">) le style sera prioritaire sur tous les autres. */
-
+/* A noter que en CSS le #id > .class > balise. En ajoutant directement dans une balise style dans une div (<div style="">) le style sera prioritaire sur tous les autres. */
 
 //***************************************** Mouse Events
+// ---------------------------------------------------
+// ***** Mouse move
+const mousemove = document.querySelector(".mousemove");
+
+window.addEventListener("mousemove", (e) => {
+    console.log(e);
+});
