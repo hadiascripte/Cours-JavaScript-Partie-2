@@ -67,10 +67,18 @@ btn2.addEventListener("click", () => {
 /* A noter que en CSS le #id > .class > balise. En ajoutant directement dans une balise style dans une div (<div style="">) le style sera prioritaire sur tous les autres. */
 
 //***************************************** Mouse Events
-// ---------------------------------------------------
+// -------------------------------------------------
+
 // ***** Mouse move
 const mousemove = document.querySelector(".mousemove");
 
+// Le (e) est un paramètre que l'on peut ajouter dans notre fontion et permet de récuperer des données.
+
+// Pour que le cercle suive la souris il faut.
 window.addEventListener("mousemove", (e) => {
-    console.log(e);
+    mousemove.style.left = e.pageX + "px";
+    mousemove.style.top= e.pageY + "px";
 });
+
+
+// ***** Mouse move
