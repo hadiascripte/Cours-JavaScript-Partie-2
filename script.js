@@ -24,8 +24,8 @@ const btn1 = document.querySelector("#btn-1");
 const btn2 = document.getElementById("btn-2");
 const response = document.querySelector("p");
 
-console.log(btn1, btn2);
-console.log(response);
+// console.log(btn1, btn2);
+// console.log(response);
 
 /*questionContainer.style.borderRadius = "150px";*/
 
@@ -74,11 +74,107 @@ const mousemove = document.querySelector(".mousemove");
 
 // Le (e) est un paramètre que l'on peut ajouter dans notre fontion et permet de récuperer des données.
 
-// Pour que le cercle suive la souris il faut.
+// Pour que le cercle suive la souris il faut sélectionner e.pageX et e.pageY car ils repésentent l'exacte prosition de la souris.
+
+//On utilise left et top car en CSS ce sont ces propriétés qui donne le positionnement d'un élément.
+
+// Il ne faut pas oublier d'ajouter par une concaténation des valeurs en PX
 window.addEventListener("mousemove", (e) => {
     mousemove.style.left = e.pageX + "px";
-    mousemove.style.top= e.pageY + "px";
+    mousemove.style.top = e.pageY + "px";
 });
 
+// ***** Mouse down
 
-// ***** Mouse move
+window.addEventListener("mousedown", () => {
+    //Pour donner une taille deux fois plus grosse
+    mousemove.style.transform = "scale(2) translate(-25%, -25%)";
+    //Attention, un élément HTML ne peut pas avoir deux fois la même propriété CSS. Il faut donc lui rappeler la première propriété dans la deuxième propriété
+});
+
+// ***** Mouse up
+
+window.addEventListener("mouseup", () => {
+    mousemove.style.transform = "scale(1) translate(-50%, -50%)";
+    mousemove.style.border = "2px solid teal";
+});
+
+// ***** Mouse enter (lorsque la souris entre dans une zone. Il est différent du hover )
+
+questionContainer.addEventListener("mouseenter", () => {
+    questionContainer.style.background = "rgba(0,0,0,0.6)";
+});
+// ***** Mouse out (lorsque la souris quitte une zone. Il est différent du hover )
+
+questionContainer.addEventListener("mouseout", () => {
+    questionContainer.style.background = "pink";
+});
+
+response.addEventListener("mouseover", () => {
+    response.style.transform = "rotate(2deg)";
+});
+
+// -------------------------------------------------------
+// ***** Keypress Event
+
+const keypressContainer = document.querySelector(".keypress");
+const key = document.getElementById("key");
+// ***** Son lors de l'appuie du son
+
+const ring = (key) => {
+    // Ici nous faisons référence à un Objet JS qui est codé dans le code source pour faire un audio. New est utilisé pour un objet
+
+    const audio = new Audio();
+    audio.src = key + ".mp3";
+    audio.play();
+    // Pour que la fonction prenne un paramètre qui pourrait servir pour tous les fichiers audio qui utilisent cet audio il faut ajouter à audio.src=key +".mp3" (qui est dans la fonction ring). Pour que ce soit fonctionnel il faut ajouter KEY en paramètre de la fonction
+
+    //
+};
+
+// Pour ajouter du texte en JS il faut ajouter un événement textContent. Nous pouvons, soit ajouter un texte prédéfini en utilisant les "" ou soit la touche qui sera saisi par l'utilisateur en ajoutant directement e.key
+
+document.addEventListener("keypress", (e) => {
+    key.textContent = e.key;
+
+    if (e.key === "h") {
+        key.textContent = "H, bravo !";
+        keypressContainer.style.background = "green";
+    } else keypressContainer.style.background = "black";
+
+    if (e.key === "h") ring(e.key);
+});
+
+// ***** Scroll Event
+
+// Pour faire afficher la barre nav après avoir scroll quelques pixel il faut lui mettre un top à -50px (par exemple) pour qu'elle n'apparaisse pas dans le body.
+
+// Puis nous allons la faire réapaparaitre après avoir scrollé un certain nombre de pixels.
+
+const nav = document.querySelector("nav");
+
+window.addEventListener("scroll", () => {
+    if (window.scrollY > 120) {
+        nav.style.top = "0";
+    } else {
+        nav.style.top = "-50px";
+    }
+});
+
+//  ----------------------------------- Formulaire
+// ***** Evénement sur un input
+
+//  Pour avoir un aperçu de ce qui est tapé dans le input il faut ajoute e.target.value
+
+// Pour stocker ce qui est tapé dans l'input il faut créer une noite qui sera évolutive (let). que l'on laissera vide au départ.
+
+// Puis nous ajoutons dans la fontion la variable let pseudo=e.target.value;
+
+const inputName = document.querySelector('input[type="text"]');
+let pseudo = "";
+
+inputName.addEventListener("input", (e) => {
+    pseudo = e.target.value;
+    console.log(pseudo);
+    
+});
