@@ -142,9 +142,7 @@ document.addEventListener("keypress", (e) => {
     } else keypressContainer.style.background = "black";
 
     if (e.key === "h") ring(e.key);
-}
-);
-
+});
 
 //****** Scroll Event
 
@@ -257,42 +255,113 @@ document.body.addEventListener(
 //************ Stop propagation
 
 // Pour arrêter un événement que l'on a paramètré, on récupère l'événement dans(e) et on ajoute e.stopPropagation();
-questionContainer.addEventListener("click",(e)=>{
+questionContainer.addEventListener("click", (e) => {
     // alert ("test 1");
     // e.stopPropagation();
-})
-
+});
 
 //  ----------------------------------- BOM
 //****** Le Browser Object Model
 // Il est au dessus du BOM. Il comprend l'objey Window qui, lui, comprend le DOM(document), BOM(navigateur,ecran,historique, frames,location), JavaScript(objets, array, function).
 
 // console.log(window.innerHeight);
- // Avec window.donnée, nous avonc accès a beaucoup d'information.
+// Avec window.donnée, nous avonc accès a beaucoup d'information.
 
- // Il permet principalement d'exécuter des actions. Ici nous faisons un popup
+// Il permet principalement d'exécuter des actions. Ici nous faisons un popup
 
 //  window.open("http://google.com", "cours js", "height=600 width=800px");
 
 //  Pour fermer la fenêtre on peut faire un window.close
 // window.close()
 
-
 // ******* Evénements adossé à window
 
+// ***** Alert
 // window.alert("Hello");
 
-btn2.addEventListener("click",()=>{
-    confirm("Voulez vous vraiment valider cette réponse ?")
-})
+// ***** Confirm
+btn2.addEventListener("click", () => {
+    confirm("Voulez vous vraiment valider cette réponse ?");
+});
 
-//  Prompt
+//***** Prompt
 // Permet de demander à l'utilisateur de rentrer des données
-btn1.addEventListener("click", (e)=>{
-
+btn1.addEventListener("click", (e) => {
     // prompt("Entrez votre nom !")
     // Pour stocker les données rentrées par l'utilisateur nous pouvons ajoueter une variable let qui servira de stockage. On l'ajoute sur la fonction qui est dans btn1
-    let answer= prompt("Entrez votre nom !");
-    questionContainer.innerHTML+="<h3> Bravo "+ answer +"</h3>"
-    
-})
+    let answer = prompt("Entrez votre nom !");
+    questionContainer.innerHTML += "<h3> Bravo " + answer + "</h3>";
+});
+
+// ------------------------------------------------------------
+
+//***** setTimeout
+// Il s'agit d'une sorte de compte à rebours, un timer. Il se compose de 2 arguments.
+
+// setTimeout(() => {
+//     // Une logique a exécuter
+//     questionContainer.style.borderRadius = "300px";
+//     //  Un temps défini en milliseconde avant de s'exécuter
+// }, 2000);
+
+//***** setInterval
+// Pour créer des boucles infinies, car il ne s'arrête jamais.
+// Pour lui donner un temps d'arrêt on doit le déclarer dans une variable.
+
+// let interval = setInterval(() => {
+//     // Une logique a exécuter
+//     document.body.innerHTML += `<div class="box">
+//         <h2> Nouvelle boîte</h2>
+//     </div>`;
+//     //  Un temps défini en milliseconde avant de s'exécuter
+// }, 1000);
+
+// document.body.addEventListener("click", (e) => {
+// Pour arrêter l'événement
+// clearInterval(interval);
+// Pour supprimer un élément
+// e.target.remove();
+// });
+
+// ***** Location
+// Il permet d'avoir des informations sur le lieu exact d'où se trouve l'utilisateur et de le rediriger vers des sites externes.
+
+// console.log(location.href);
+// console.log(location.host);
+// console.log(location.pathname);
+// console.log(location.search);
+
+// Pour envoyer l'utilisateur sur un autre site on utilise le location.replace
+// location.replace("http://lequipe.fr");
+
+// // On peut également utiliser
+// window.onload = () => {
+//     location.href = "http://google.com";
+// };
+
+// ***** Navigator
+// Permet d'avoir des informations sur les données de navigations sur le navigateur web de l'utlisateur
+// console.log(navigator.userAgent);
+
+//Il permet également de géolocaliser l'utilisateur. Pour cela il faut utiliser un code qui se trouve dans la documentation
+
+// ***** History
+
+// Il permet
+// console.log(history);
+
+// Pour faire un retour en arrière, par exemple après la validation d'un formulaire il faut ajouter window.history.back();
+// window.history.back();
+// Pour revenir en arrière sur plusieurs pages il faut ajouter le nombre de retour voulu
+// history.go(-2)
+
+// ***** setProperty
+// Pour ajouter un after sur le mouvement de la souris ceci ne fonctionnerait pas car en JS on ne peut pas cibler un after.
+
+// On doit donc ajouter en CSS un after et ses propriété CSS et on ajoute en CSS          left: var(--x) ;
+//           top:var(--y) ;
+
+window.addEventListener("mousemove", (e) => {
+    nav.style.setProperty("--x", e.layerX + "px");
+    nav.style.setProperty("--y", e.layerY + "px");
+});
