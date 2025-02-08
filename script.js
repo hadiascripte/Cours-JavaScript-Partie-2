@@ -136,16 +136,17 @@ const ring = (key) => {
 
 document.addEventListener("keypress", (e) => {
     key.textContent = e.key;
-
     if (e.key === "h") {
-        key.textContent = "H, bravo !";
         keypressContainer.style.background = "green";
+        // keypressContainer.innerHTML+="<h3> Bravo, tu as trouvé la bonne lettre !</h3>"
     } else keypressContainer.style.background = "black";
 
     if (e.key === "h") ring(e.key);
-});
+}
+);
 
-// ***** Scroll Event
+
+//****** Scroll Event
 
 // Pour faire afficher la barre nav après avoir scroll quelques pixel il faut lui mettre un top à -50px (par exemple) pour qu'elle n'apparaisse pas dans le body.
 
@@ -162,7 +163,7 @@ window.addEventListener("scroll", () => {
 });
 
 //  ----------------------------------- Formulaire
-// ***** Evénement sur un input
+//****** Evénement sur un input
 
 //  Pour avoir un aperçu de ce qui est tapé dans le input il faut ajoute e.target.value
 
@@ -171,10 +172,127 @@ window.addEventListener("scroll", () => {
 // Puis nous ajoutons dans la fontion la variable let pseudo=e.target.value;
 
 const inputName = document.querySelector('input[type="text"]');
+const select = document.querySelector("select");
+const form = document.querySelector("form");
+
 let pseudo = "";
+let language = "";
 
 inputName.addEventListener("input", (e) => {
     pseudo = e.target.value;
-    console.log(pseudo);
-    
 });
+select.addEventListener("input", (e) => {
+    language = e.target.value;
+});
+// Pour stocker les informations données dans les inputs ou textarea, nous devons envoyer les données dans une boite qui sera une variable.
+
+form.addEventListener("submit", (e) => {
+    // La plus part du temps il faut ajouter une méthode au formulaire pour empêcher le navigateur d'agir avec ses paramètres par défaut. En ajoutant e.preventDafault() on annule ce changement de page qui est un paramètre par défaut. Il faut bien ajoute (e) dans le paramètre
+    e.preventDefault();
+
+    // Il faut maintenant faire en sorte que les CGV soient bien cochées avant de pourvoir valider. On va donc mettrte cette logique dans un IF.
+    // A noter que nous n'avons pas besoin de déclarer de variable pour une check box. Il suffot de mettre un ID pour que JS le connaisse. Ceci fonctionne aussi pour les boutons.
+
+    if (cgv.checked) {
+        //Nous allons ici ajouter des balises avec innerHtml en utilisant la concaténation avec les guillemets de la touche 7. Nous souhaitons ici injecter les balises dans la div qui est dans le formulaire.
+
+        document.querySelector("form>div").innerHTML = `<h3>Pseudo: ${pseudo}</h3>
+        <h4>Langage préféré: ${language}</h4>
+        `;
+    } else {
+        alert("Veuillez accepter les CGV");
+    }
+});
+//****** Load Event
+// Il se déclenche une fois que toute la page a été chargé. Ceci peut éviter les problèmes de performance.
+
+window.addEventListener("load", () => {
+    //On y ajoute ici ce que l'on veut faire déclencher
+});
+
+// Pour sélection plusieurs éléments à qui on voudrait donner les mêmes paramètres on peut le faire de deux façons.
+
+const boxes = document.querySelectorAll(".box");
+// console.log(boxes);
+// Attention, on ne l'utilise que s'il y a plusieurs éléments qui ont cette class en question
+
+//****** For Each
+// boxes.addEventListener("click", () => console.log("test"));
+
+// A savoir que l'on ne peut pas faire un addEventListener sur plusieur éléments. Il faudra pour cela le faire pour chacun des éléments.
+
+// On réalise donc une method forEach pour chacun d'eux
+boxes.forEach((box) => {
+    box.addEventListener("click", (e) => {
+        // e.target.style.transform = "scale(0.7)";
+    });
+});
+
+//***** addEventListener VS onclick
+
+// Il n'est pas recommandé d'utiliser le onclick car on ne peut lui attribuer qu'un seul événement. Si on ajoute un événement, le dernier événement écrasera le précédent.
+
+// document.body.onclick = (ring) => {
+//     console.log("ring");
+// };
+
+//*****
+// Dans addEventListener il y a deux événements Bubbling et Usecapture
+
+//Bubbling=> ici l'événement est déclenché à la fin. Il est par défaut sur false
+document.body.addEventListener("click", () => {
+    // console.log("click 1 !");
+});
+
+//Usecapture=> ici l'événement est déclenché au début en ajoutant un 3ème arguments dans les paramètre. Il faut impérativement ajouter True en 3ème argument pour qu'il soit pris en premier.
+// A noter qu'il devancera tout les événement qui auront un click.
+document.body.addEventListener(
+    "click",
+    () => {
+        // console.log("click 2 !");
+    },
+    true
+);
+
+//************ Stop propagation
+
+// Pour arrêter un événement que l'on a paramètré, on récupère l'événement dans(e) et on ajoute e.stopPropagation();
+questionContainer.addEventListener("click",(e)=>{
+    // alert ("test 1");
+    // e.stopPropagation();
+})
+
+
+//  ----------------------------------- BOM
+//****** Le Browser Object Model
+// Il est au dessus du BOM. Il comprend l'objey Window qui, lui, comprend le DOM(document), BOM(navigateur,ecran,historique, frames,location), JavaScript(objets, array, function).
+
+// console.log(window.innerHeight);
+ // Avec window.donnée, nous avonc accès a beaucoup d'information.
+
+ // Il permet principalement d'exécuter des actions. Ici nous faisons un popup
+
+//  window.open("http://google.com", "cours js", "height=600 width=800px");
+
+//  Pour fermer la fenêtre on peut faire un window.close
+// window.close()
+
+
+// ******* Evénements adossé à window
+
+// window.alert("Hello");
+
+btn2.addEventListener("click",()=>{
+    confirm("Voulez vous vraiment valider cette réponse ?")
+})
+
+//  Prompt
+// Permet de demander à l'utilisateur de rentrer des données
+btn1.addEventListener("click", (e)=>{
+
+    // prompt("Entrez votre nom !")
+    // Pour stocker les données rentrées par l'utilisateur nous pouvons ajoueter une variable let qui servira de stockage. On l'ajoute sur la fonction qui est dans btn1
+    let answer= prompt("Entrez votre nom !");
+    questionContainer.innerHTML+="<h3> Bravo "+ answer +"</h3>"
+    
+})
